@@ -109,7 +109,7 @@ GET `/api/sectors`
   "Electronic and Optics",
   "Food and Beverage",
   "Bakery & Confectionary",
-   "other sectors"
+  "other sectors"
 ]
 ```
 
