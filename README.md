@@ -97,3 +97,24 @@ GET `/api/users/a0b13313-7e79-4f06-8c29-fd86e5edd0c6`
       "__v": 0
   }
   ```
+
+### Error Responses
+
+### 400 Bad Request:
+- If required fields are missing in the request body or if the specified sector is invalid.
+
+```json
+  {
+  
+  "error": "All fields are mandatory"
+
+  }
+
+  ```
+
+  ```json
+    {
+      "error": "Invalid sector"
+    }
+
+  ```
