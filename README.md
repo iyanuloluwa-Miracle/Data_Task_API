@@ -108,8 +108,8 @@ GET `/api/sectors`
   "Construction materials",
   "Electronic and Optics",
   "Food and Beverage",
-  "Bakery & Confectionary"
-  // ... (other sectors)
+  "Bakery & Confectionary",
+   "other sectors"
 ]
 ```
 
