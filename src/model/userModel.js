@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
-const sectorsConfig = require('../config/sectorsConfig');
+const mongoose = require("mongoose");
+const { v4: uuidv4 } = require("uuid");
+const sectorsConfig = require("../config/sectorsConfig");
 
 const userSchema = new mongoose.Schema({
   userId: { type: String, default: uuidv4 },
@@ -13,6 +13,6 @@ const userSchema = new mongoose.Schema({
   agreeToTerms: { type: Boolean, required: true },
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
