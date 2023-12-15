@@ -14,4 +14,4 @@ mongoose
   });
 
 //Models
-
+require('./userModel')
