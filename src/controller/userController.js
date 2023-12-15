@@ -6,22 +6,25 @@ const createUser = async (req, res) => {
   try {
     const { name, sectors, agreeToTerms } = req.body;
 
+    // Validate required fields
     if (!name || !sectors || !agreeToTerms) {
-      return res.status(400).json({ error: "All fields are mandatory" });
+      return res.status(400).json({ error: 'All fields are mandatory' });
     }
 
-    // Check if the provided sector is valid
-    if (!sectorsConfig.includes(sectors)) {
-      return res.status(400).json({ error: "Invalid sector" });
+    // Check if the provided sectors are valid entities
+    if (!Array.isArray(sectors) || sectors.length === 0 || !sectors.every(sector => sectorsConfig.includes(sector))) {
+      return res.status(400).json({ error: 'Invalid sectors' });
     }
 
-    const newUser = new User({ name, sectors, agreeToTerms });
+    const numberOfSelectedSectors = sectors.length;  // Calculate the number of selected sectors
+
+    const newUser = new User({ name, sectors, numberOfSelectedSectors, agreeToTerms });
     const savedUser = await newUser.save();
 
     res.json(savedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -46,25 +49,22 @@ const updateUser = async (req, res) => {
     const { userId } = req.params;
     const { name, sectors, agreeToTerms } = req.body;
 
+    // Validate required fields
     if (!name || !sectors || !agreeToTerms) {
-      return res.status(400).json({ error: "All fields are mandatory" });
+      return res.status(400).json({ error: 'All fields are mandatory' });
     }
 
-    // Check if the provided sector is valid
-    if (!sectorsConfig.includes(sectors)) {
-      return res.status(400).json({ error: "Invalid sector" });
+    // Check if the provided sectors are valid entities
+    if (!Array.isArray(sectors) || sectors.length === 0 || !sectors.every(sector => sectorsConfig.includes(sector))) {
+      return res.status(400).json({ error: 'Invalid sectors' });
     }
 
-    const updatedUser = await User.findOneAndUpdate(
-      { userId },
-      { name, sectors, agreeToTerms },
-      { new: true }
-    );
+    const updatedUser = await User.findOneAndUpdate({ userId }, { name, sectors, numberOfSelectedSectors: sectors.length, agreeToTerms }, { new: true });
 
     res.json(updatedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
