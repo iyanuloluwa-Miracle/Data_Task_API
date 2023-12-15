@@ -68,4 +68,13 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUser, updateUser };
+
+const getAllSectors = (req, res) => {
+  try {
+    res.json(sectorsConfig);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+module.exports = { createUser, getUser, updateUser, getAllSectors };

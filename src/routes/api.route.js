@@ -14,4 +14,6 @@ router.get("/users/:userId", userController.getUser);
 // Update user by userId
 router.put("/users/:userId", userController.updateUser);
 
+router.get('/sectors', userController.getAllSectors);
+
 module.exports = router;
